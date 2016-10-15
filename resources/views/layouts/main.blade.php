@@ -80,7 +80,7 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
         <div class="w3-col m3">
             <!-- Profile -->
             <div class="w3-card-2 w3-round w3-white " style="min-height:350px;">
-                @yield('information')
+                @include('information.info')
             </div>
             <br>
               

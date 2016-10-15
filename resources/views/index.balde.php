@@ -1,6 +1,11 @@
 @extends('layouts.main')
 
-@section('content')
+@section('information')
+@section('information1')
+@section('information2')
+@section('information3')
+@section('information4')
+@section('information5')
 <html>
 <title>W3.CSS Template</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -301,4 +306,9 @@ function openNav() {
 </body>
 </html>
 
+@endsection
+@endsection
+@endsection
+@endsection
+@endsection
 @endsection

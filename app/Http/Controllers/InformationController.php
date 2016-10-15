@@ -8,8 +8,8 @@ use App\Http\Requests;
 
 class InformationController extends Controller
 {
-    public function index()
+    public function showInfo()
     {
-    	return view('information.info');
+    	return view('information.showInfo');
     }
 }
