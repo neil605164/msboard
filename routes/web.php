@@ -30,4 +30,4 @@ information:
 index_info
 */
 
-Route::get('/index_info', 'informationController@index');
+Route::get('/info', 'InformationController@index');

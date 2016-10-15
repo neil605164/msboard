@@ -13,7 +13,8 @@
     <p><i class="fa fa-birthday-cake fa-fw w3-margin-right w3-text-theme"></i> April 1, 1988</p>
 
     @if(!auth::guest())
-    <a href="#"><i class="fa fa-pencil fa-fw w3-margin-bottom" title="edit" style="margin-left: 290px;"></i></a>
+        <a href="#"><i class="fa fa-pencil fa-fw w3-margin-bottom" title="edit" style="margin-left: 290px;"></i></a>
     @endif
+
 </div>
 @endsection   
