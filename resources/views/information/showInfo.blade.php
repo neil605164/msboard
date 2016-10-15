@@ -1,4 +1,4 @@
-@extends('layouts.account')
+@extends('layouts.information')
 
 @section('showInfo')
 i am in showinfo

@@ -34,14 +34,8 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
     </ul>
 </div><!-- End Navbar -->
 
-@if(auth::guest())
 <div class="w3-display-middle" style="min-height: 310px; width: 600px;border: 2px solid black;border-radius: 8px;">
     @yield('content')
-</div>
-@endif
-
-<div class="w3-display-middle" style="min-height: 310px; width: 600px;border: 2px solid black;border-radius: 8px;">
-    @yield('showInfo')
 </div>
 
 </body>

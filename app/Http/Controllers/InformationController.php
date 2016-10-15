@@ -10,6 +10,6 @@ class InformationController extends Controller
 {
     public function showInfo()
     {
-    	return view('information.showInfo');
+    	return view('layouts.information');
     }
 }
