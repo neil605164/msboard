@@ -11,23 +11,18 @@
 |
 */
 
+#use Illuminate\Support\Facades\Auth;
+
 Route::get('/', function () {
+
     return view('/layouts.main');
 });
 
 Auth::routes();
 
-
-#登入機制管制
-#Route::get('/account', 'HomeController@index');
-
-/*Route::get('/account', ['middleware' => 'auth', function () {
-    //
-}]);*/
-
-/*
+/*登入機制管制
 information:
 index_info
 */
-
-Route::get('/showinfo', 'InformationController@showInfo');
+Route::get('/showInfo', ['middleware' => 'auth', 'uses' => 'InformationController@showInfo']);
+Route::post('/postInfo', ['middleware' => 'auth', 'uses' => 'InformationController@postInfo']);

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+
 class HomeController extends Controller
 {
     /**
@@ -11,6 +12,8 @@ class HomeController extends Controller
      *
      * @return void
      */
+
+    #中介層的另一種表達方式
     public function __construct()
     {
         $this->middleware('auth');
