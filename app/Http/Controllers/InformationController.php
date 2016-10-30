@@ -21,9 +21,7 @@ class InformationController extends Controller
         #呼叫與user資料表相同id的information資料表裡面的資料
         //$info = information::find(5);
         $info = DB::table('information')->where('user_id', '=', $user->id)->get();
-        //die($info);
-
-
+        
         #將變數存成陣列
     	$data = ['users' => $user, 'infos' => $info];
     	return view('information.showInfo', $data);

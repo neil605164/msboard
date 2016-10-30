@@ -7,27 +7,33 @@
 
 		<form method="POST" name="showform" action="{{ url('/postInfo') }}" class="w3-container" id="showInfo" onsubmit="return verify()">
 			{{ csrf_field() }}
-			@foreach($infos as $info)
+			
 				
 				<div class="w3-padding w3-left">
 
 					<label>部落格名稱:</label>
-					@if($info->name == NULL)
-						<input type="text" name="name" >
+					
+					@if($infos != NULL)
+						@foreach($infos as $info)
+							<input type="text" name="name" value="{{ $info->name }}">
+						@endforeach
 					@else
-						<input type="text" name="name" value="{{ $info->name }}">
+						<input type="text" name="name" >
 					@endif
+					
 				</div>
 				
 				<div class="w3-padding w3-left">
 
 					<label>部落格描述:</label>
-
-					@if($info->discription == NULL)
-						<textarea rows="4" cols="20" name="discription" ></textarea>
-					@else
+					@foreach($infos as $info)
+					@if(!empty($info))
 						<textarea rows="4" cols="20" name="discription" >{{ $info->discription }}</textarea>
+					@else
+						<textarea rows="4" cols="20" name="discription" ></textarea>
 					@endif
+					@endforeach
+					
 				</div>
 				
 
@@ -38,7 +44,7 @@
 						<select name="type">
 						
 							<?php $types=['','心情日記','職場甘苦','資訊科技','攝影寫真','休閒體育','寵物日記','不設分類'] ?> 
-							
+							@foreach($infos as $info)
 							@if($info->type == NULL)
 								@foreach($types as $type)		
 									<option  value="{{ $type }}">{{ $type }}</option>						
@@ -50,7 +56,7 @@
 									<option  value="{{ $type }}">{{ $type }}</option>						
 								@endforeach
 							@endif
-
+							@endforeach
 						
 
 						</select>
@@ -58,12 +64,13 @@
 				</div>
 					
 					<input type="hidden" name="user_id" value="{{ $users->id }}">
+					@foreach($infos as $info)
 					<input type="hidden" name="info_id" value="{{ $info->id }}">
-				
+					@endforeach
 			
 			<button form="showInfo" class="w3-btn w3-white w3-border w3-round-large w3-left" style="margin-left: 30px;" onclick="alert('修改成功')">送出</button>
 
-			@endforeach
+			
 		</form>
 
 		
