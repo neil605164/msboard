@@ -2,23 +2,36 @@
 
 @section('showInfo')
 <div class="w3-center" style="position: relative;">
-	<div style="max-width:350px; " class="w3-content">
+	<div style="max-width:430px; " class="w3-content">
 		
 
-		<form method="POST" name="showform" action="{{ url('/postInfo') }}" class="w3-container" id="showInfo" onsubmit="return verify()">
+		<form method="POST" name="showform" action="{{ url('/postInfo') }}" class="w3-container" id="showInfo" enctype="multipart/form-data" onsubmit="return verify()">
 			{{ csrf_field() }}
 			
 				
+				<div class="w3-padding w3-left" >
+
+					<p>
+					<label>大頭貼:</label>
+					</p>
+
+					@forelse ($photos as $photo)
+						<img src="{{ '../storage/app/' . $photo->path }}" alt="尚未上傳圖片" width="300px" height="200px" style="border: 5px solid; border-radius: 12px"">
+					@empty
+						<img src="" alt="尚未上傳圖片" width="300px" height="200px" style="border: 5px solid; border-radius: 12px"">
+					@endforelse
+
+				</div>
+
 				<div class="w3-padding w3-left">
 
 					<label>部落格名稱:</label>
-					
-					@if($infos != NULL)
+					@if(count($infos) == 0)
+						<input type="text" name="name" >
+					@else
 						@foreach($infos as $info)
 							<input type="text" name="name" value="{{ $info->name }}">
 						@endforeach
-					@else
-						<input type="text" name="name" >
 					@endif
 					
 				</div>
@@ -26,38 +39,48 @@
 				<div class="w3-padding w3-left">
 
 					<label>部落格描述:</label>
-					@foreach($infos as $info)
-					@if(!empty($info))
-						<textarea rows="4" cols="20" name="discription" >{{ $info->discription }}</textarea>
-					@else
+					@if(count($infos) == 0)
 						<textarea rows="4" cols="20" name="discription" ></textarea>
+					@else
+						@foreach($infos as $info)
+							<textarea rows="4" cols="20" name="discription" >{{ $info->discription }}</textarea>
+						@endforeach
 					@endif
-					@endforeach
+					
+				</div>
+
+				<div class="w3-padding w3-left">
+
+					<label>上傳相片:</label>
+					<input type="file" name="photo" >
 					
 				</div>
 				
-
 				<div class="w3-padding w3-left">
 
 					<label>部落格分類:</label>
 
-						<select name="type">
+						<select name="type" >
 						
-							<?php $types=['','心情日記','職場甘苦','資訊科技','攝影寫真','休閒體育','寵物日記','不設分類'] ?> 
-							@foreach($infos as $info)
-							@if($info->type == NULL)
+							<?php $types=['','心情日記','職場甘苦','資訊科技','攝影寫真','休閒體育','寵物日記','不設分類'] ?>
+
+							@if(count($infos) == 0)
+
 								@foreach($types as $type)		
 									<option  value="{{ $type }}">{{ $type }}</option>						
 								@endforeach
 
 							@else
-								<option  value="{{ $info->type }}">{{ $info->type }}</option>
-								@foreach($types as $type)		
-									<option  value="{{ $type }}">{{ $type }}</option>						
+
+								@foreach($types as $type)
+									@if($info->type == $type)		
+										<option  value="{{ $type }}" selected>{{ $type }}</option>
+									@else
+										<option  value="{{ $type }}" >{{ $type }}</option>
+									@endif						
 								@endforeach
+
 							@endif
-							@endforeach
-						
 
 						</select>
 
@@ -93,4 +116,5 @@
 		}
 	}
 </script>-->
+
 @endsection
