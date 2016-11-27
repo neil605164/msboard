@@ -15,20 +15,7 @@ use App\Photo;
 
 class InformationController extends Controller
 {
-    /*public function indexInfo()
-    {
-        #呼叫登入者的資訊，用變數user儲存
-        $user = Auth::user();
 
-        #呼叫與user資料表相同id的information、photo資料表裡面的資料
-        $info = DB::table('information')->where('user_id', '=', $user->id)->get();
-        #$photo = DB::table('photos')->where('user_id', '=', $user->id)->get();
-        $photo = DB::table('photos')->where('user_id', '=', $user->id)->orderBy('created_at', 'desc')->first();
-        die($photo);
-
-        $data = ['infos' => $info, 'photos' => $photo];
-        return view('information.info', $data);
-    }*/
     public function showInfo()
     {
         #呼叫登入者的資訊，用變數user儲存

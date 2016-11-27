@@ -80,21 +80,35 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
         <div class="w3-col m3">
             <!-- Profile -->
             <div class="w3-card-2 w3-round w3-white " style="min-height:350px;">
-                @include('information.info')
+
+                <div class="w3-container">
+
+                    <h4 class="w3-center">My Photo</h4>
+                    @if(isset($photos))
+                            <p class="w3-center"><img src="{{ url('../storage/app/' . $photos->path) }}" width="300px" height="200px" style="border: 5px solid; border-radius: 12px""></p>
+                    @else
+                            <p class="w3-center"><img alt="尚未上傳圖片" width="300px" height="200px" style="border: 5px solid; border-radius: 12px""></p>
+                    @endif
+                    <hr>
+
+                    @foreach($infos as $info)
+                    <p><i class="fa fa-pencil fa-fw w3-margin-right w3-text-theme"></i>{{ $info->name }}</p>
+                    <p><i class="fa fa-home fa-fw w3-margin-right w3-text-theme"></i>{{ $info->type }}</p>
+                    <p><i class="fa fa-birthday-cake fa-fw w3-margin-right w3-text-theme"></i>{{ $info->discription}}</p>
+                    @endforeach
+
+                    @if(!auth::guest())
+                        <a href="{{ url('/showInfo') }}"><i class="fa fa-pencil fa-fw w3-margin-bottom" title="edit" style="margin-left: 290px;"></i></a>
+                    @endif
+
+                </div>
+
             </div>
             <br>
               
             <!-- Accordion -->
             <div class="w3-card-2 w3-round">
                 <div class="w3-accordion w3-white">
-                    <button onclick="myFunction('Demo1')" class="w3-btn-block w3-theme-l1 w3-left-align"><i class="fa fa-circle-o-notch fa-fw w3-margin-right"></i> My Groups</button>
-                    <div id="Demo1" class="w3-accordion-content w3-container" style="min-height:150px;">
-                        @yield('information1')
-                    </div>
-                    <button onclick="myFunction('Demo2')" class="w3-btn-block w3-theme-l1 w3-left-align"><i class="fa fa-calendar-check-o fa-fw w3-margin-right"></i> My Events</button>
-                    <div id="Demo2" class="w3-accordion-content w3-container" style="min-height:150px;">
-                        @yield('information2')
-                    </div>
                     <button onclick="myFunction('Demo3')" class="w3-btn-block w3-theme-l1 w3-left-align"><i class="fa fa-users fa-fw w3-margin-right"></i> My Photos</button>
                     <div id="Demo3" class="w3-accordion-content w3-container" style="min-height:150px;">
                         <div class="w3-row-padding">
