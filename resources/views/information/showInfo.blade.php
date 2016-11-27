@@ -15,11 +15,12 @@
 					<label>大頭貼:</label>
 					</p>
 
-					@forelse ($photos as $photo)
-						<img src="{{ '../storage/app/' . $photo->path }}" alt="尚未上傳圖片" width="300px" height="200px" style="border: 5px solid; border-radius: 12px"">
-					@empty
-						<img src="" alt="尚未上傳圖片" width="300px" height="200px" style="border: 5px solid; border-radius: 12px"">
-					@endforelse
+					@if(isset($photos))
+						<img src="{{ url('../storage/app/' . $photos->path) }}" width="300px" height="200px" style="border: 5px solid; border-radius: 12px"">
+					@else
+						<img alt="尚未上傳圖片" width="300px" height="200px" style="border: 5px solid; border-radius: 12px"">
+					@endif
+					
 
 				</div>
 

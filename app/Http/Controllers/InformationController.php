@@ -22,9 +22,8 @@ class InformationController extends Controller
 
         #呼叫與user資料表相同id的information、photo資料表裡面的資料
         $info = DB::table('information')->where('user_id', '=', $user->id)->get();
-        $photo = DB::table('photos')->where('user_id', '=', $user->id)->get();
-        #$photo = DB::table('photos')->where('user_id', '=', $user->id)->orderBy('created_at', 'desc')->first();
-
+        #$photo = DB::table('photos')->where('user_id', '=', $user->id)->get();
+        $photo = DB::table('photos')->where('user_id', '=', $user->id)->orderBy('created_at', 'desc')->first();
 
         #將變數存成陣列
     	$data = ['users' => $user, 'infos' => $info, 'photos' => $photo];
