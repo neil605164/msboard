@@ -20,7 +20,9 @@ Auth::routes();
 
 /*登入機制管制
 information:
-index_info
+info
+showInfo
 */
+Route::get('indexInfo', 'InformationController@indexInfo');
 Route::get('/showInfo', ['middleware' => 'auth', 'uses' => 'InformationController@showInfo']);
 Route::post('/postInfo', ['middleware' => 'auth', 'uses' => 'InformationController@postInfo']);
