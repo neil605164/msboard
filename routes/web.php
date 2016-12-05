@@ -11,6 +11,9 @@
 |
 */
 
+/*
+可以將function獨立出來
+*/
 Route::get('/', function () {
 
 	if(!auth::guest()){
@@ -45,3 +48,15 @@ showInfo
 */
 Route::get('/showInfo', ['middleware' => 'auth', 'uses' => 'InformationController@showInfo']);
 Route::post('/postInfo', ['middleware' => 'auth', 'uses' => 'InformationController@postInfo']);
+
+
+/*登入機制管制
+MyPhoto:
+myPhoto
+*/
+/*Route::get('/showPhoto', function () {
+	return view ('MyPhoto.showPhoto');        
+});*/
+#Route::get('/showPhoto', 'MyPhotoController@showPhoto');
+Route::get('/showPhoto', ['middleware' => 'auth', 'uses' => 'MyPhotoController@showPhoto']);
+Route::delete('/deletePhoto', ['middleware' => 'auth', 'uses' => 'MyPhotoController@deletePhoto']);

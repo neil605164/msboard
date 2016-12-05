@@ -112,7 +112,11 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
                     <button onclick="myFunction('Demo3')" class="w3-btn-block w3-theme-l1 w3-left-align"><i class="fa fa-users fa-fw w3-margin-right"></i> My Photos</button>
                     <div id="Demo3" class="w3-accordion-content w3-container" style="min-height:150px;">
                         <div class="w3-row-padding">
-                            @yield('information3')
+                            <p>.....</p>
+                            @if(!auth::guest())
+                                <a href="{{ url('/showPhoto') }}"><i class="fa fa-pencil fa-fw w3-margin-bottom" title="edit" style="margin-left: 270px; margin-top: 80px;"></i></a>
+                            @endif
+
                         </div>
                     </div>
                 </div>

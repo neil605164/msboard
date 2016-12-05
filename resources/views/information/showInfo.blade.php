@@ -1,4 +1,4 @@
-@extends('layouts.information')
+@extends('information.information')
 
 @section('showInfo')
 <div class="w3-center" style="position: relative;">
