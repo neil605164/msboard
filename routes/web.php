@@ -18,14 +18,16 @@ Route::get('/', function () {
 
 	if(!auth::guest()){
 		#呼叫登入者的資訊，用變數user儲存
-	    $user = Auth::user();
+	    $user      = Auth::user();
 
 	    #呼叫與user資料表相同id的information、photo資料表裡面的資料
-	    $info = DB::table('information')->where('user_id', '=', $user->id)->get();
-	    #$photo = DB::table('photos')->where('user_id', '=', $user->id)->get();
-	    $photo = DB::table('photos')->where('user_id', '=', $user->id)->orderBy('created_at', 'desc')->first();
+	    $info      = DB::table('information')->where('user_id', '=', $user->id)->get();
+	    #抓放在大頭貼的照片
+	    $photo     = DB::table('photos')->where('user_id', '=', $user->id)->orderBy('created_at', 'desc')->first();
+	    #抓全部的照片
+	    $all_photo = DB::table('photos')->where('user_id', '=', $user->id)->get();
 
-	    $data = ['infos' => $info, 'photos' => $photo];
+	    $data = ['infos' => $info, 'photos' => $photo, 'all_photos' => $all_photo];
 
     
     	return view('/layouts.main', $data);
@@ -34,8 +36,9 @@ Route::get('/', function () {
 
 		$info = DB::table('information')->get();
 		$photo = DB::table('photos')->orderBy('created_at', 'desc')->first();
+		$all_photo = DB::table('photos')->get();
 
-		$data = ['infos' => $info, 'photos' => $photo];
+		$data = ['infos' => $info, 'photos' => $photo, 'all_photos' => $all_photo];
 		return view('/layouts.main', $data);
 	}
 });

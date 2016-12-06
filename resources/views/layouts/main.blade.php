@@ -84,8 +84,9 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
                 <div class="w3-container">
 
                     <h4 class="w3-center">My Photo</h4>
+                    <!--這裡可以優化-->
                     @if(isset($photos))
-                            <p class="w3-center"><img src="{{ url('../storage/app/' . $photos->path) }}" width="300px" height="200px" style="border: 5px solid; border-radius: 12px""></p>
+                            <p class="w3-center"><img src="{{ url('../storage/app/' . $photos->path) }}" width="300px" height="200px" style="border: 5px solid; border-radius: 12px"></p>
                     @else
                             <p class="w3-center"><img alt="尚未上傳圖片" width="300px" height="200px" style="border: 5px solid; border-radius: 12px""></p>
                     @endif
@@ -112,9 +113,15 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
                     <button onclick="myFunction('Demo3')" class="w3-btn-block w3-theme-l1 w3-left-align"><i class="fa fa-users fa-fw w3-margin-right"></i> My Photos</button>
                     <div id="Demo3" class="w3-accordion-content w3-container" style="min-height:150px;">
                         <div class="w3-row-padding">
-                            <p>.....</p>
-                            @if(!auth::guest())
+                            @if(!auth::guest() && isset($all_photos))
+                                @foreach($all_photos as $all_photo)
+                                    <img src="{{ url('../storage/app/' . $all_photo->path) }}" alt="尚未上傳圖片" width="120px" height="80px" style="border: 3px solid; border-radius: 5px">
+                                @endforeach
                                 <a href="{{ url('/showPhoto') }}"><i class="fa fa-pencil fa-fw w3-margin-bottom" title="edit" style="margin-left: 270px; margin-top: 80px;"></i></a>
+                            @else
+                                @foreach($all_photos as $all_photo)
+                                    <img src="{{ url('../storage/app/' . $all_photo->path) }}" alt="尚未上傳圖片" width="120px" height="80px" style="border: 3px solid; border-radius: 5px">
+                                @endforeach
                             @endif
 
                         </div>

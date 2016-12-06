@@ -15,7 +15,6 @@
 			@if(isset($photos))
 				@foreach($photos as $photo)
 						<img src="{{ url('../storage/app/' . $photo->path) }}" alt="無法顯示圖片" width="300px" height="200px" style="border: 2px solid; border-radius: 5px; ">
-						<input type="text" name="photo_name[]" value="{{ $photo->path }}">
 						<input type="checkbox" name="check_array[]" value="{{ $photo->id }}" class='w3-center'>
 				@endforeach
 			@endif

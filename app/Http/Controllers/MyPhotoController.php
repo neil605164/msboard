@@ -28,18 +28,19 @@ class MyPhotoController extends Controller
     public function deletePhoto(Request $request)
     {
         $photo_info = $request->input('check_array');
-        $photo_name = $request->input('photo_name'); 
-        var_dump($photo_name);
-        die();
+
         #刪除資料庫中的「資料」
-        /*foreach ($photo_info as $my_check_photo) {
-            DB::table('photos')->where('id', '=', $my_check_photo)->delete();
-        }*/
+        foreach ($photo_info as $my_check_photo) {
+            $photo = DB::table('photos')->where('id', '=', $my_check_photo)->get();
+            echo $photo->path;
+            die();
+            //$photo->delete();
+        }
 
         #找到勾選的該筆資料
 
             #刪除目錄中的「檔案」
-            Storage::delete($photo_info[0]);
+            //Storage::delete($photo_info[0]);
         
         
         
