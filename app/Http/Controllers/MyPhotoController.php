@@ -31,19 +31,14 @@ class MyPhotoController extends Controller
 
         #刪除資料庫中的「資料」
         foreach ($photo_info as $my_check_photo) {
-            $photo = DB::table('photos')->where('id', '=', $my_check_photo)->get();
-            echo $photo->path;
-            die();
-            //$photo->delete();
+            
+            $photos = DB::table('photos')->select('path')->where('id', '=', $my_check_photo)->get();
+            Storage::delete($photos[0]->path);
+            DB::table('photos')->where('id', '=', $my_check_photo)->delete();
+            
         }
+       
 
-        #找到勾選的該筆資料
-
-            #刪除目錄中的「檔案」
-            //Storage::delete($photo_info[0]);
-        
-        
-        
 
         /*
         必須要redirect回到showPhoto()的function，這樣才能重新取照片加上顯示

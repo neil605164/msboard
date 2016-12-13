@@ -46,6 +46,13 @@ Route::get('/', function () {
 Auth::routes();
 
 /*登入機制管制
+Oauth:
+Oauth
+*/
+
+Route::get('/Oauth', ['middleware' => 'auth', 'uses' => 'OauthController@showQRCode']);
+
+/*登入機制管制
 information:
 showInfo
 */

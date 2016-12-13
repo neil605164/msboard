@@ -1,7 +1,6 @@
 @extends('information.information')
 @section('showInfo')
 
-<p>I'm in myPhoto.blade.php</p>
 <div class="w3-center" style="position: relative;">
 
 		
