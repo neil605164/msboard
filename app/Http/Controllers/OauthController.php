@@ -6,10 +6,44 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 
+use Auth;
+use PragmaRX\Google2FA\Google2FA;
 class OauthController extends Controller
 {
+    
+    /*
+    *產生一個QR Code圖片
+    *QR Code存放名稱、信箱、QR Code密碼
+    *
+    *
+    */
     public function showQRCode()
     {
-        return view('Oauth.Oauth');
+        //$global $user;
+        $user = Auth::user();
+        $google2fa = new Google2FA();
+        $google2fa = $google2fa->getQRCodeGoogleUrl(
+            'Neil_Hsieh_QR_Code',
+            $user->email,
+            $user->secret
+        );
+
+        $data = ['google2fa' => $google2fa];
+        return view('Oauth.Oauth', $data);
+    }
+
+    /*
+    *接收前端輸入驗證碼欄位的值
+    *接著用verifyKey()進行比對
+    *若比對相同就登入成功
+    *錯誤就顯是驗證碼錯誤的訊息
+    */
+    public function Verify(Request $request)
+    {
+        $user = Auth::user();
+        $google2fa = new Google2FA();
+        $myCode = $request->input('mycode');
+        $valid  = $google2fa->verifyKey($user->secret, $myCode);
+        return redirect('/');
     }
 }

@@ -2,6 +2,11 @@
 
 @section('content')
 
+<?php
+    use PragmaRX\Google2FA\Google2FA;
+    $google2fa  = new Google2FA;
+?>
+
 <form class="w3-container" role="form" method="POST" action="{{ url('/register') }}">
     {{ csrf_field() }}
 
@@ -61,6 +66,7 @@
     </div>
 
     <br>
+     <input id="secret" type="hidden" class="form-control" name="secret" value="{{ $google2fa->generateSecretKey() }}">
     <div class="form-group">
         <div class="col-md-6 col-md-offset-4">
             <button type="submit" class="w3-btn w3-round-large" style="margin-left: 470px;">

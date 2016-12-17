@@ -177,6 +177,10 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+        #使用google2fa前需完成的前置作業
+        PragmaRX\Google2FA\Vendor\Laravel\ServiceProvider::class,
+        #使用HTML::的前置作業
+        Collective\Html\HtmlServiceProvider::class,
 
     ],
 
@@ -225,6 +229,11 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
+        #使用google2fa前需完成的前置作業
+        'Google2FA' => PragmaRX\Google2FA\Vendor\Laravel\Facade::class,
+        #使用HTML::的前置作業
+        'Form' => Collective\Html\FormFacade::class,
+        'Html' => Collective\Html\HtmlFacade::class,
 
     ],
 

@@ -49,8 +49,8 @@ Auth::routes();
 Oauth:
 Oauth
 */
-
 Route::get('/Oauth', ['middleware' => 'auth', 'uses' => 'OauthController@showQRCode']);
+Route::post('/Verify', ['middleware' => 'auth', 'uses' => 'OauthController@Verify']);
 
 /*登入機制管制
 information:
