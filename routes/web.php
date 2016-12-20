@@ -12,9 +12,18 @@
 */
 
 /*
-可以將function獨立出來
+可以將function獨立出來,就像第17行
+登入機制管制
+msboard:
+msboard
 */
-Route::get('/', function () {
+Route::get('/', 'MainController@index');
+/*Route::post('/PB_message', function () {
+    return view('layouts.main');
+});*/
+#Route::post('/PB_message', 'MainController@store');
+Route::post('/PB_message', ['middleware' => 'auth', 'uses' => 'MainController@store'] );
+/*Route::get('/', function () {
 
 	if(!auth::guest()){
 		#呼叫登入者的資訊，用變數user儲存
@@ -41,7 +50,7 @@ Route::get('/', function () {
 		$data = ['infos' => $info, 'photos' => $photo, 'all_photos' => $all_photo];
 		return view('/layouts.main', $data);
 	}
-});
+});*/
 
 Auth::routes();
 
@@ -70,3 +79,4 @@ myPhoto
 #Route::get('/showPhoto', 'MyPhotoController@showPhoto');
 Route::get('/showPhoto', ['middleware' => 'auth', 'uses' => 'MyPhotoController@showPhoto']);
 Route::delete('/deletePhoto', ['middleware' => 'auth', 'uses' => 'MyPhotoController@deletePhoto']);
+

@@ -47,3 +47,4 @@ class OauthController extends Controller
         return redirect('/');
     }
 }
+https://chart.googleapis.com/chart?chs=200x200&chld=M|0&cht=qr&chl=otpauth%3A%2F%2Ftotp%2FNeil_Hsieh_QR_Code%3Aneil605164%40yahoo.com.tw%3Fsecret%3D6KOIWZK5LABNTPDJ%26issuer%3DNeil_Hsieh_QR_Code
