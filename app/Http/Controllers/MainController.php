@@ -43,7 +43,7 @@ class MainController extends Controller
         $info = DB::table('information')->get();
         $photo = DB::table('photos')->orderBy('created_at', 'desc')->first();
         $all_photo = DB::table('photos')->get();
-        $all_message = DB::table('msboard')->where('user_id', '=', $user->id)->get();
+        $all_message = DB::table('msboards')->get();
 
         $data = ['infos' => $info, 'photos' => $photo, 'all_photos' => $all_photo, 'message' => $all_message];
         return view('/layouts.main', $data);
@@ -69,7 +69,10 @@ class MainController extends Controller
     public function store(Request $request)
     {
         $content = $request->input('content');
-        $user_id = $request->input('user_id');   
+        $user_id = $request->input('user_id');
+        $type    = $request->input('type');
+        echo $type;
+        exit;   
 
         $msboard = new msboard;
         $msboard->content = $content;

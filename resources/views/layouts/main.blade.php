@@ -165,7 +165,7 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
         <!-- Middle Column -->
 
         <div class="w3-col m7">
-            <form action="{{ url('/PB_message') }}" method="POST">
+            <form action="{{ url('/PB_message') }}" method="POST" >
             {{ csrf_field() }}
                 <div class="w3-row-padding">
                     <div class="w3-col m12">
@@ -173,33 +173,46 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
                             <div class="w3-container w3-padding">
                                 <h6 class="w3-opacity">寫下你的心情吧</h6>
                                 <textarea name="content" contenteditable="true" class="w3-border w3-padding" style="width:700px;height:150px;"></textarea>
+                                @if(!auth::guest())
                                 <input type="hidden" value="{{ $user->id }}" name="user_id">
+                                @endif
                                 <button class="w3-btn w3-theme"><i class="fa fa-pencil"></i> 發佈 </button> 
+                                <input type="hidden" name="type" value="ms_all">
                             </div>
                         </div>
                     </div>
                 </div>
             </form>  
-            <div class="w3-container w3-card-2 w3-white w3-round w3-margin" style="min-height:250px;"><br>
-                @if(!empty($message) & $message!==null & $message !=='')
-                    @if(isset($photos))
+
+            @if(count($message)>0)
+                @foreach($message as $content)
+                <div class="w3-container w3-card-2 w3-white w3-round w3-margin" style="min-height:250px;"><br>
+                
+                    @if(count($photos)>0 && !auth::guest())
+
                         <img src="{{ url('../storage/app/' . $photos->path) }}" alt="無法顯示圖片" class="w3-left w3-Rounded w3-margin-right" style="width:60px">
-                    @endif
-                    <span class="w3-right w3-opacity">1 min</span>
-                    @if(!auth::guest() && isset($message))
+                    
+                        <span class="w3-right w3-opacity">1 min</span>
                         <h4>{{ $user->name }}</h4><br>
+                    @else
+                        <p class="fa fa-close">目前沒有權限看見發文者</p>
                     @endif
                     <hr class="w3-clear">
                     @if(isset($message))
-                        @foreach($message as $content)
                         <p>{{  $content->content }}</p>
-                        @endforeach
                     @endif
-                @endif
-                <button type="button" class="w3-btn w3-theme-d1 w3-margin-bottom"><i class="fa fa-thumbs-up"></i>  Like</button> 
-                <button type="button" class="w3-btn w3-theme-d2 w3-margin-bottom"><i class="fa fa-comment"></i>  Comment</button>
-            </div>
-                    
+                    <form action="{{ url('/PB_message') }}" method="POST" >
+
+                        <button type="button" id="ms_guest_bt" class="w3-btn w3-theme-d1 w3-margin-bottom" value="1" name="ms_button"><i class="fa fa-thumbs-up"></i>  Like</button> 
+                        <button type="button" id="ms_guest_bt" class="w3-btn w3-theme-d2 w3-margin-bottom" value="2" name="ms_button"><i class="fa fa-comment"></i>  回覆</button>
+                        <input type="text" name="ms_guest" style="display:block; width: 100%; ">
+                        <input type="hidden" name="msboard_id" value="{{ $content->id }}">
+                        <input type="hidden" name="type" value="ms_guest">
+                    </form>
+                 
+                </div>
+                @endforeach
+            @endif        
         <!-- End Middle Column -->
         </div>
         
@@ -280,6 +293,12 @@ function openNav() {
         x.className += " w3-show";
     } else {
         x.className = x.className.replace(" w3-show", "");
+    }
+}
+
+function emterKey(){
+    if(event.keycode == 13){
+        document.getElementById('ms_guest_bt').submit();
     }
 }
 </script>

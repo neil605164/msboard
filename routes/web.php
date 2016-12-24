@@ -22,7 +22,7 @@ Route::get('/', 'MainController@index');
     return view('layouts.main');
 });*/
 #Route::post('/PB_message', 'MainController@store');
-Route::post('/PB_message', ['middleware' => 'auth', 'uses' => 'MainController@store'] );
+Route::post('/PB_message', 'MainController@store');
 /*Route::get('/', function () {
 
 	if(!auth::guest()){
